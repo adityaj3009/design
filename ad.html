@@ -1,1 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Kings Ad Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    
+    /* Hero Section Styling */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #0a0a0a;
+      padding: 0;
+    }
+    
+    /* Canvas Background Container */
+    .hero-canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    #heroCanvas {
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+    }
+    
+    /* Hero Content */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 100%;
+      max-width: 900px;
+      padding: 0 20px;
+    }
+    
+    /* Logo Animation */
+    .logo-animation {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+    
+    .logo-letter {
+      font-family: 'Playfair Display', serif;
+      color: #ff6f61;
+      font-size: 2rem;
+      margin: 0 2px;
+      display: inline-block;
+      animation: letterPulse 4s infinite;
+    }
+    
+    .logo-letter:nth-child(1) { animation-delay: 0.1s; }
+    .logo-letter:nth-child(2) { animation-delay: 0.2s; }
+    .logo-letter:nth-child(3) { animation-delay: 0.3s; }
+    .logo-letter:nth-child(4) { animation-delay: 0.4s; }
+    .logo-letter:nth-child(5) { animation-delay: 0.5s; }
+    .logo-letter:nth-child(6) { animation-delay: 0.6s; }
+    .logo-letter:nth-child(7) { animation-delay: 0.7s; }
+    .logo-letter:nth-child(8) { animation-delay: 0.8s; }
+    
+    /* Main Heading */
+    .animated-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      margin: 0;
+      color: #fff;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+    
+    .word-wrapper {
+      display: inline-block;
+      position: relative;
+    }
+    
+    .word-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: #ff6f61;
+      animation: lineExpand 1.2s ease forwards 1.2s;
+    }
+    
+    .letter {
+      display: inline-block;
+      animation: letterWave 5s infinite;
+    }
+    
+    .letter:nth-child(1) { animation-delay: 0s; }
+    .letter:nth-child(2) { animation-delay: 0.05s; }
+    .letter:nth-child(3) { animation-delay: 0.1s; }
+    .letter:nth-child(4) { animation-delay: 0.15s; }
+    .letter:nth-child(5) { animation-delay: 0.2s; }
+    
+    .subtitle-text {
+      display: block;
+      font-size: 2rem;
+      color: #ccc;
+      margin-top: 10px;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    
+    /* Slogan Animation */
+    .slogan-container {
+      margin: 30px 0;
+      overflow: hidden;
+      height: 50px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards 1s;
+    }
+    
+    .slogan {
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 0;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: wordSlideUp 0.5s ease forwards;
+      position: relative;
+    }
+    
+    .word1 { animation-delay: 1.3s; }
+    .word2 { animation-delay: 1.5s; }
+    .word3 { animation-delay: 1.7s; }
+    .word4 { animation-delay: 1.9s; }
+    .word5 { animation-delay: 2.1s; }
+    .word6 { animation-delay: 2.3s; }
+    .word7 { animation-delay: 2.5s; }
+    
+    .highlight-word {
+      position: relative;
+      color: #ff6f61;
+    }
+    
+    /* CTA Buttons */
+    .cta-container {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards 2.8s;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 15px 30px;
+      background: #ff6f61;
+      color: #fff;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+    }
+    
+    .cta-button:hover::before {
+      left: 100%;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255, 111, 97, 0.6);
+    }
+    
+    .cta-button.outline {
+      background: transparent;
+      border: 2px solid #ff6f61;
+      box-shadow: none;
+    }
+    
+    .cta-button.outline:hover {
+      background: rgba(255, 111, 97, 0.2);
+      transform: translateY(-5px);
+    }
+    
+    /* Animated Shapes */
+    .hero-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+    
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: float 25s infinite linear;
+      filter: blur(5px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    
+    .shape1 {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(45deg, #ff6f61, #ff9d96);
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 35s;
+    }
+    
+    .shape2 {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #5d5dff, #9d9dff);
+      top: 70%;
+      left: 20%;
+      animation-delay: 5s;
+      animation-duration: 25s;
+    }
+    
+    .shape3 {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(45deg, #ffcc33, #ffd966);
+      top: 30%;
+      right: 15%;
+      animation-delay: 2s;
+      animation-duration: 30s;
+    }
+    
+    .shape4 {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(45deg, #33cc99, #66d9b8);
+      bottom: 10%;
+      right: 5%;
+      animation-delay: 7s;
+      animation-duration: 40s;
+    }
+    
+    .shape5 {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, #ff3366, #ff6699);
+      bottom: 30%;
+      left: 40%;
+      animation-delay: 10s;
+      animation-duration: 35s;
+    }
+    
+    /* Creative Ad Elements */
+    .ad-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+    
+    .ad-element {
+      position: absolute;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards, float2 15s infinite ease-in-out;
+    }
+    
+    .element-1 {
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(255, 111, 97, 0.7);
+      border-radius: 50%;
+      top: 15%;
+      left: 15%;
+      animation-delay: 3s;
+    }
+    
+    .element-2 {
+      width: 120px;
+      height: 5px;
+      background: rgba(93, 93, 255, 0.5);
+      top: 25%;
+      right: 15%;
+      animation-delay: 3.2s;
+      transform: rotate(45deg);
+    }
+    
+    .element-3 {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 204, 51, 0.5);
+      bottom: 25%;
+      left: 20%;
+      animation-delay: 3.4s;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+    
+    .element-4 {
+      width: 90px;
+      height: 90px;
+      border: 3px solid rgba(51, 204, 153, 0.5);
+      bottom: 30%;
+      right: 20%;
+      animation-delay: 3.6s;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+    
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 4s;
+    }
+    
+    .scroll-indicator::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 30px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+    
+    .scroll-indicator::after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      margin: -25px auto 0;
+      animation: scrollDown 2s infinite;
+    }
+    
+    /* Grid Background */
+    .grid-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 2;
+    }
+    
+    /* Cursor style */
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background-color: #fff;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    /* Keyframe Animations */
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes letterPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+    
+    @keyframes letterWave {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    @keyframes wordSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes float {
+0% {
+opacity: 0;
+transform: translate(0, 0) rotate(0deg) scale(0.8);
+}
+10% {
+opacity: 0.3;
+}
+50% {
+opacity: 0.2;
+transform: translate(100px, -50px) rotate(180deg) scale(1.2);
+}
+90% {
+opacity: 0.3;
+}
+100% {
+opacity: 0;
+transform: translate(0, 0) rotate(360deg) scale(0.8);
+}
+}
+@keyframes float2 {
+0%, 100% {
+transform: translateY(0) rotate(0deg);
+}
+50% {
+transform: translateY(-15px) rotate(5deg);
+}
+}
+@keyframes fadeIn {
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+}
+@keyframes lineExpand {
+0% {
+width: 0%;
+}
+100% {
+width: 100%;
+}
+}
+@keyframes scrollDown {
+0% {
+transform: translateY(0);
+opacity: 1;
+}
+50% {
+transform: translateY(8px);
+opacity: 0.5;
+}
+100% {
+transform: translateY(0);
+opacity: 1;
+}
+}
+@keyframes glowPulse {
+0%, 100% {
+filter: drop-shadow(0 0 3px rgba(255, 111, 97, 0.7));
+}
+50% {
+filter: drop-shadow(0 0 12px rgba(255, 111, 97, 0.9));
+}
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+.animated-heading {
+font-size: 3.5rem;
+}
+.subtitle-text {
+font-size: 1.5rem;
+}
+.slogan {
+font-size: 1.2rem;
+}
+.cta-container {
+flex-direction: column;
+gap: 15px;
+}
+.logo-animation {
+margin-top: 50px;
+}
+.ad-elements {
+display: none;
+}
+}
+@media (max-width: 480px) {
+.animated-heading {
+font-size: 2.5rem;
+}
+.subtitle-text {
+font-size: 1.2rem;
+}
+.logo-letter {
+font-size: 1.5rem;
+}
+}
+</style>
+</head>
+<body>
+  <section class="hero">
+    <!-- Canvas Background -->
+    <div class="hero-canvas-container">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+<!-- Grid Background -->
+<div class="grid-background"></div>
 
+<!-- Animated shapes -->
+<div class="hero-shapes">
+  <div class="shape shape1"></div>
+  <div class="shape shape2"></div>
+  <div class="shape shape3"></div>
+  <div class="shape shape4"></div>
+  <div class="shape shape5"></div>
+</div>
+
+<!-- Ad design elements -->
+<div class="ad-elements">
+  <div class="ad-element element-1"></div>
+  <div class="ad-element element-2"></div>
+  <div class="ad-element element-3"></div>
+  <div class="ad-element element-4"></div>
+</div>
+
+<!-- Main Content -->
+<div class="hero-content">
+  <!-- Logo Animation -->
+  <div class="logo-animation">
+    <span class="logo-letter">C</span>
+    <span class="logo-letter">R</span>
+    <span class="logo-letter">E</span>
+    <span class="logo-letter">A</span>
+    <span class="logo-letter">T</span>
+    <span class="logo-letter">I</span>
+    <span class="logo-letter">V</span>
+    <span class="logo-letter">E</span>
+  </div>
+  
+  <!-- Main Heading -->
+  <h1 class="animated-heading">
+    <span class="word-wrapper">
+      <span class="letter">K</span>
+      <span class="letter">I</span>
+      <span class="letter">N</span>
+      <span class="letter">G</span>
+      <span class="letter">S</span>
+    </span>
+    <span class="subtitle-text">Campaigns</span>
+  </h1>
+  
+  <!-- Slogan -->
+  <div class="slogan-container">
+    <h2 class="slogan">
+      <span class="word word1">We</span>
+      <span class="word word2">Turn</span>
+      <span class="word word3">Your</span>
+      <span class="word word4">Vision</span>
+      <span class="word word5">Into</span>
+      <span class="word word6 highlight-word">Amazing</span>
+      <span class="word word7">Reality</span>
+    </h2>
+  </div>
+  
+  <!-- CTA Buttons -->
+  <div class="cta-container">
+    <a href="#services" class="cta-button">Get Started</a>
+    <a href="#portfolio" class="cta-button outline">Our Work</a>
+  </div>
+</div>
+
+<!-- Scroll Indicator -->
+<div class="scroll-indicator"></div>
+  </section>
+  <script>
+    // Hero Canvas Animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('heroCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas dimensions
+      const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // Mouse position tracking
+      let mouseX = 0;
+      let mouseY = 0;
+      
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      
+      // Create particles
+      const particlesArray = [];
+      const numberOfParticles = Math.min(100, Math.floor(window.innerWidth / 20));
+      const colorPalette = ['#ff6f61', '#33cc99', '#5d5dff', '#ffcc33', '#ff3366'];
+      const connectDistance = 150;
+      
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 5 + 1;
+          this.baseSize = this.size;
+          this.speedX = Math.random() * 2 - 1;
+          this.speedY = Math.random() * 2 - 1;
+          this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+          this.alpha = Math.random() * 0.5 + 0.1;
+        }
+        
+        update() {
+          // Basic movement
+          this.x += this.speedX;
+          this.y += this.speedY;
+          
+          // Mouse interaction
+          const dx = mouseX - this.x;
+          const dy = mouseY - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            // Repel from mouse
+            this.speedX -= dx * 0.01;
+            this.speedY -= dy * 0.01;
+            this.size = this.baseSize * 1.5;
+          } else {
+            this.size = this.baseSize;
+          }
+          
+          // Boundary check
+          if (this.x > canvas.width || this.x < 0) {
+            this.speedX = -this.speedX;
+          }
+          if (this.y > canvas.height || this.y < 0) {
+            this.speedY = -this.speedY;
+          }
+          
+          // Speed limit
+          if (Math.abs(this.speedX) > 2) {
+            this.speedX = this.speedX > 0 ? 2 : -2;
+          }
+          if (Math.abs(this.speedY) > 2) {
+            this.speedY = this.speedY > 0 ? 2 : -2;
+          }
+        }
+        
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color + Math.floor(this.alpha * 255).toString(16).padStart(2, '0');
+          ctx.fill();
+        }
+      }
+      
+      function connectParticles() {
+        for (let i = 0; i < particlesArray.length; i++) {
+          for (let j = i + 1; j < particlesArray.length; j++) {
+            const dx = particlesArray[i].x - particlesArray[j].x;
+            const dy = particlesArray[i].y - particlesArray[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < connectDistance) {
+              const opacity = 1 - distance / connectDistance;
+              ctx.strokeStyle = particlesArray[i].color + Math.floor(opacity * 100).toString(16).padStart(2, '0');
+              ctx.lineWidth = 0.5;
+              ctx.beginPath();
+              ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+              ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      
+      function createParticles() {
+        for (let i = 0; i < numberOfParticles; i++) {
+          particlesArray.push(new Particle());
+        }
+      }
+      
+      function handleParticles() {
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+        }
+        connectParticles();
+      }
+      
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        handleParticles();
+        requestAnimationFrame(animate);
+      }
+      
+      createParticles();
+      animate();
+      
+      // Typing effect for additional drama
+      const words = ["Campaigns", "Branding", "Marketing", "Design", "Advertising"];
+      const typingElement = document.querySelector('.subtitle-text');
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let typingDelay = 150;
+      
+      function typeEffect() {
+        const currentWord = words[wordIndex];
+        
+        if (!isDeleting) {
+          typingElement.innerHTML = currentWord.substring(0, charIndex) + '<span class="cursor">|</span>';
+          charIndex++;
+          
+          if (charIndex > currentWord.length) {
+            isDeleting = true;
+            typingDelay = 1000; // Pause at end of word
+          }
+        } else {
+          typingElement.innerHTML = currentWord.substring(0, charIndex) + '<span class="cursor">|</span>';
+          charIndex--;
+          
+          if (charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            typingDelay = 500; // Pause before new word
+          }
+        }
+        
+        setTimeout(typeEffect, typingDelay);
+      }
+      
+      // Start typing animation after initial animations
+      setTimeout(typeEffect, 3000);
+    });
+  </script>
+</body>
+</html>
